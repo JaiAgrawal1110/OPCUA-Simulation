@@ -1,0 +1,97 @@
+{% extends "Home/base.html" %}
+{% load static %}
+
+{% block title %}Contact - My Simple Website{% endblock %}
+
+{% block content %}
+
+<style>
+  body {
+    background: url('{% static "Home/images/bg 5.avif" %}') no-repeat center center fixed;
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    color: white; 
+  }
+  a {
+    color: #000;
+  }
+</style>
+
+<h1>Contact Us</h1>
+<p style="color:orange">Email: <a href="mailto:jaiagrawal1110@gmail.com">jaiagrawal1110@gmail.com</a></p>
+<p style="color:orange">Phone: <a href="tel:+919694863033">+91 9694863033</a></p>
+<div class="form-wrapper">
+  <form method="post" action="/submit_contact/" class="contact-form">
+    {% csrf_token %}
+    <label for="name">Name *:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Email *:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="Mobile number">Mobile No.:</label>
+    <input type="contact" id="Mobile No." name="MObile No." required>
+
+    <label for="message">Message:</label>
+    <textarea id="message" name="message" rows="5" required></textarea>
+
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
+<style>
+  .form-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+  }
+
+  .contact-form {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .contact-form label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #2c2c2c;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #fff;
+    color: #000;
+    font-size: 1rem;
+  }
+
+  .contact-form button {
+    margin-top: 20px;
+    background-color: orange;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .contact-form button:hover {
+    background-color: darkorange;
+  }
+</style>
+
+{% endblock %}

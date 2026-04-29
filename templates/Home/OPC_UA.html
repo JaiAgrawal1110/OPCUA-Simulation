@@ -1,0 +1,203 @@
+{% extends "Home/base.html" %}
+{% load static %}
+
+{% block title %}OPC UA CNC Data Transfer{% endblock %}
+
+{% block content %}
+<style>
+  body {
+    background: url("{% static 'Home/images/bg4.jpeg' %}") no-repeat center center fixed;
+    background-size: cover;
+  }
+  h1 {
+    margin-top: 40px;
+    text-shadow: 2px 2px 4px #000;
+    color: white;
+  }
+  p.description {
+    max-width: 600px;
+    margin: 1em auto;
+    font-size: 1.1rem;
+    text-shadow: 1px 1px 3px #000;
+    color: white;
+  }
+  .section {
+    margin-bottom: 3em;
+    text-align: center;
+  }
+  .btn-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+  button, select {
+    padding: 14px 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+  }
+  select {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+  }
+  .btn-start {
+    background: linear-gradient(90deg, #1abc9c 0%, #16a085 100%);
+    color: white;
+  }
+  .btn-start:hover {
+    background: linear-gradient(90deg, #16a085 0%, #1abc9c 100%);
+    transform: translateY(-2px) scale(1.04);
+  }
+  .btn-stop {
+    background: #555;
+    color: white;
+    opacity: 0.9;
+  }
+  .btn-stop:hover {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+  #dataDisplay {
+    margin: 0 auto;
+    margin-top: 20px;
+    background-color: rgba(0,0,0,0.5);
+    padding: 15px;
+    border-radius: 10px;
+    max-width: 700px;
+    text-align: left;
+    color: white;
+    white-space: pre-wrap;
+  }
+</style>
+
+<h1>OPC UA CNC Data Transfer</h1>
+
+<!-- MongoDB Section -->
+<div class="section">
+  <p class="description">
+    <b>Transfer data from <span style="color:#1abc9c;">MongoDB</span> to OPC UA.</b>
+  </p>
+  <div class="btn-group">
+    <button id="startMongoTransferBtn" class="btn-start" onclick="startMongoTransfer()">Start MongoDB Transfer</button>
+    <button id="stopMongoTransferBtn" class="btn-stop" onclick="stopMongoTransfer()" disabled>Stop MongoDB Transfer</button>
+  </div>
+</div>
+
+<!-- MySQL Section -->
+<div class="section">
+  <p class="description">
+    <b>Transfer data from <span style="color:#e67e22;">MySQL</span> to OPC UA.</b>
+  </p>
+  <div class="btn-group">
+    <button id="startMySQLTransferBtn" class="btn-start" onclick="startMySQLTransfer()">Start MySQL Transfer</button>
+    <button id="stopMySQLTransferBtn" class="btn-stop" onclick="stopMySQLTransfer()" disabled>Stop MySQL Transfer</button>
+  </div>
+</div>
+
+<!-- Filter & Show Data Section -->
+<div class="section">
+  <p class="description">View live filtered OPC UA data from the active transfer.</p>
+  <div class="btn-group">
+    <select id="statusFilter">
+      <option value="all">All</option>
+      <option value="Running">Running</option>
+      <option value="Idle">Idle</option>
+      <option value="Error">Error</option>
+    </select>
+
+    <button class="btn-start" onclick="showData()">Show Data</button>
+    <button id="hideDataBtn" class="btn-stop" onclick="hideData()" disabled>Hide Data</button>
+  </div>
+</div>
+
+<!-- Data Display -->
+<div id="dataDisplay" style="display: none;">
+  <h3>Live CNC Data:</h3>
+  <pre id="cncData">Loading...</pre>
+</div>
+
+<script>
+  let dataInterval;
+
+  function startMongoTransfer() {
+    fetch('/start_transfer/')
+      .then(res => res.json())
+      .then(data => {
+        alert(data.status);
+        document.getElementById('startMongoTransferBtn').disabled = true;
+        document.getElementById('stopMongoTransferBtn').disabled = false;
+      });
+  }
+
+  function stopMongoTransfer() {
+    fetch('/stop_transfer/')
+      .then(res => res.json())
+      .then(data => {
+        alert(data.status);
+        document.getElementById('startMongoTransferBtn').disabled = false;
+        document.getElementById('stopMongoTransferBtn').disabled = true;
+      });
+  }
+
+  function startMySQLTransfer() {
+    fetch('/start_mysql_transfer/')
+      .then(res => res.json())
+      .then(data => {
+        alert(data.status);
+        document.getElementById('startMySQLTransferBtn').disabled = true;
+        document.getElementById('stopMySQLTransferBtn').disabled = false;
+      });
+  }
+
+  function stopMySQLTransfer() {
+    fetch('/stop_mysql_transfer/')
+      .then(res => res.json())
+      .then(data => {
+        alert(data.status);
+        document.getElementById('startMySQLTransferBtn').disabled = false;
+        document.getElementById('stopMySQLTransferBtn').disabled = true;
+      });
+  }
+
+  function showData() {
+    document.getElementById('hideDataBtn').disabled = false;
+    document.getElementById('dataDisplay').style.display = 'block';
+    const output = document.getElementById('cncData');
+    const status = document.getElementById('statusFilter').value;
+
+    function fetchFilteredData() {
+      fetch(`/filtered_data/?status=${status}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.status === "ok" && data.data && data.data.length > 0) {
+            output.innerText = JSON.stringify(data.data, null, 2);
+          } else if (data.data && data.data.length === 0) {
+            output.innerText = `No data found for status "${status}".`;
+          } else {
+            output.innerText = data.message || "No data available.";
+          }
+        })
+        .catch(() => {
+          output.innerText = "Error loading filtered data.";
+        });
+    }
+
+    fetchFilteredData();
+    clearInterval(dataInterval);
+    dataInterval = setInterval(fetchFilteredData, 2000);
+  }
+
+  function hideData() {
+    document.getElementById('hideDataBtn').disabled = true;
+    document.getElementById('dataDisplay').style.display = 'none';
+    clearInterval(dataInterval);
+  }
+</script>
+{% endblock %}

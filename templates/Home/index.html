@@ -1,0 +1,156 @@
+{% extends "Home/base.html" %}
+{% load static %}
+
+{% block title %}Home - MachBridge{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="hero-content">
+    <h1>MachBridge</h1>
+    <h3>Bridging CNC Machines with AI & OPC UA Intelligence</h3>
+    <p>Smarter data. Smarter factories.</p>
+  </div>
+</section>
+
+<!-- About MachBridge -->
+<section class="about-section">
+  <div class="content-wrapper">
+    <h2>What is MachBridge?</h2>
+    <p>
+      <strong>MachBridge</strong> is a revolutionary platform that connects CNC machines to a digital ecosystem using
+      <strong>OPC UA</strong> protocols, unlocking the power of <strong>real-time data</strong> and <strong>AI-driven insights</strong>.
+    </p>
+    <p>
+      Whether you're looking to enhance operational efficiency, monitor machine health, or implement predictive maintenance strategies — MachBridge does it all with precision and scalability.
+    </p>
+  </div>
+</section>
+
+<!-- Key Features -->
+<section class="features-section">
+  <div class="content-wrapper">
+    <h2>Core Features</h2>
+    <ul>
+      <li><strong>Real-time CNC Data Acquisition</strong> – Stream and store vital machine data effortlessly.</li>
+      <li><strong>OPC UA Integration</strong> – Industry-standard secure communication with machines.</li>
+      <li><strong>AI & ML Analytics</strong> – From anomaly detection to performance forecasting.</li>
+      <li><strong>Custom Dashboards</strong> – Visualize insights that matter most to your operations.</li>
+      <li><strong>Scalable Architecture</strong> – From small setups to industrial-scale deployments.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Call to Action -->
+<section class="cta-section">
+  <div class="content-wrapper">
+    <h2>Empower Your Factory Floor</h2>
+    <p>Join the industrial revolution with MachBridge and make your machines work smarter for you.</p>
+    <a href="/Contacts/" class="cta-button">Get in Touch</a>
+  </div>
+</section>
+
+<!-- Styles -->
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f5f5dc; /* Beige */
+    color: #1f1f1f; /* Dark text for contrast */
+  }
+
+  .hero-section {
+    background: linear-gradient(to right, #e0e0b8, #f5f5dc);
+    padding: 100px 20px;
+    text-align: center;
+  }
+
+  .hero-content h1 {
+    color: #ff8c00; /* Soft orange for contrast */
+    font-size: 4rem;
+    margin-bottom: 10px;
+  }
+
+  .hero-content h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+
+  .hero-content p {
+    font-size: 1.2rem;
+    color: #333;
+  }
+
+  .content-wrapper {
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 0 20px;
+  }
+
+  .about-section h2,
+  .features-section h2,
+  .cta-section h2 {
+    color: #cc6600;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .about-section p,
+  .features-section ul,
+  .cta-section p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    text-align: center;
+  }
+
+  .features-section ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .features-section li {
+    margin-bottom: 15px;
+    background-color: #fff8dc;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: left;
+    color: #333;
+    border: 1px solid #e0d7b1;
+  }
+
+  .cta-button {
+    display: inline-block;
+    background-color: #ffa500;
+    color: black;
+    padding: 12px 24px;
+    margin-top: 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+
+  .cta-button:hover {
+    background-color: #ff8c00;
+  }
+
+  @media (max-width: 768px) {
+    .hero-content h1 {
+      font-size: 2.5rem;
+    }
+
+    .hero-content h3 {
+      font-size: 1.2rem;
+    }
+
+    .about-section,
+    .features-section,
+    .cta-section {
+      padding: 30px 10px;
+    }
+  }
+</style>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "Home/base.html" %}
+
+{% block title %}About Us - My Simple Website{% endblock %}
+{% load static %}
+
+{% block content %}
+<style>
+  body {
+    background: url('{% static "Home/images/bg 4.avif" %}') no-repeat center center fixed;
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    color: white; 
+  }
+  
+</style>
+
+<h1>About Us</h1>
+<p style=" color:grey ; font-size: 22px; line-height: 1.6;">
+    This website is designed to facilitate seamless data transfer from CNC (Computer Numerical Control) machines to an OPC UA (Open Platform Communications Unified Architecture) server.<br><br>
+    Our goal is to help industries collect real-time machine data for monitoring, analysis, and automation. By bridging CNC systems with OPC UA, we ensure reliable, scalable, and standardized industrial data exchange.
+</p>
+<div class="how-it-works">
+  <h2>How We Built It</h2>
+  <p style="color:grey ; font-size: 22px;">
+    At MachBridge, we set out to bridge the gap between traditional manufacturing and intelligent automation. Our approach is rooted in real-time data acquisition from CNC machines using OPC UA (Open Platform Communications Unified Architecture), a robust and scalable communication standard widely adopted in Industry 4.0.
+  </p>
+  <p style="color:grey ; font-size: 22px;">    We're using Python to simulate CNC data and push it to an OPC UA server, ensuring reliable machine-to-server communication. On the frontend, Django powers the web interface, while our custom JavaScript carousel and smooth UI deliver a user-friendly experience.
+  </p>
+  <p style="color:grey ; font-size: 22px;">    Every decision — from using responsive layouts to intuitive visuals — is designed to help industries effortlessly monitor machine performance, anticipate failures, and make smarter operational decisions.
+  </p>
+</div>
+
+<style>
+  .how-it-works {
+    background-color: rgba(255, 255, 255, 0.05); /* subtle transparent background */
+    padding: 30px;
+    border-radius: 15px;
+    margin-top: 40px;
+    color: #e0e0e0;
+    font-size: 1.1rem;
+  }
+
+  .how-it-works h2 {
+    color: #ff8c00; /* strong orange to stand out */
+    font-size: 2rem;
+    margin-bottom: 15px;
+  }
+
+  .how-it-works p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+  }
+</style>
+
+
+{% endblock %}

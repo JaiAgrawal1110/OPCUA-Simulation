@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}My Simple Website{% endblock %}</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #d3d3d3; /* grey background */
+      color: #000;
+    }
+
+    .navbar {
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px; /* Reduced horizontal padding */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #FFA500; /* Orange */
+  margin-left: 0; /* Ensures no offset */
+}
+
+.nav-links {
+  display: flex;
+  gap: 15px;
+}
+
+.nav-links a {
+  color: #ecf0f1;
+  padding: 12px 15px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-links a:hover {
+  background-color: #1abc9c;
+  color: #fff;
+  border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .nav-links a {
+    padding: 10px 0;
+  }
+}
+
+
+    .navbar {
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    padding: 14px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    
+    position: fixed;      /* make it stick */
+    top: 0;               /* align to top */
+    left: 0;
+    width: 100%;
+    z-index: 1000;        /* ensure it stays above other content */
+}
+
+
+    .navbar a {
+      color: #fff;
+      padding: 12px 20px;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-weight: 600;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .navbar a:hover {
+      background-color: #1abc9c;
+      color: #fff;
+      border-radius: 5px;
+    }
+
+    .content {
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 40px;
+    text-align: center;
+    color: #000;
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+
+    .content h1 {
+    font-size: 2.5rem;
+    color: #f39c12;
+    margin-top: 10px; 
+    margin-bottom: 10px;
+}
+
+.content {
+    margin: 10px auto; 
+    ...
+}
+
+
+
+    .content p {
+      font-size: 1.1rem;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .content {
+        margin: 20px;
+        padding: 20px;
+      }
+
+      .navbar {
+        flex-direction: column;
+      }
+
+      .navbar a {
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation bar -->
+ <div class="navbar">
+    <div class="logo">MachBridge</div>
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/About_us/">About Us</a>
+        <a href="/Contacts/">Contact Us</a>
+        <a href="/OPC_UA/">OPC UA</a>
+    </div>
+</div>
+
+
+  <!-- Page content -->
+  <div class="content">
+    {% block content %}
+    <h1>Welcome to Our Website!</h1>
+    <p>This is a clean and elegant layout with a modern navigation bar and a solid content area. 
+    Explore the About Us and Contact sections for more information.</p>
+    {% endblock %}
+  </div>
+
+</body>
+</html>
