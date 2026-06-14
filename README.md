@@ -1,4 +1,4 @@
-# 🏭 OPC UA CNC Machine Monitor
+# 🏭 MachBridge — OPC UA CNC Machine Monitor
 
 > Real-time CNC machine monitoring dashboard built during my internship at INDXO — streams historical machine telemetry from MongoDB via OPC UA protocol and displays it on a live web dashboard refreshing every 2 seconds.
 
@@ -53,6 +53,20 @@ Status Filter → Running / Idle / Error
 ```
 
 ---
+
+## Screenshots
+
+### Homepage
+![Homepage](Screenshots/homepage.png)
+
+### OPC UA Data Transfer
+![OPC UA Transfer](Screenshots/opcua_transfer.png)
+
+### Live CNC Data Feed
+![Live Data](Screenshots/live_data.png)
+
+### Status Filter
+![Status Filter](Screenshots/status_filter.png)
 
 ## Tech Stack — and Why
 
@@ -137,4 +151,4 @@ The OPC UA layer reads records from MongoDB and publishes them as nodes, but the
 
 ---
 
-MIT © 2026 Jai Agrawal — Internship Project, INDXO
+MIT © 2026 Jai Agrawal — MachBridge, Internship Project at INDXO
